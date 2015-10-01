@@ -2,18 +2,15 @@
 
 namespace Flysap\ImageManager;
 
+use Eloquent\ImageAble\ImageAbleServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Flysap\Support;
 
 class ImageManagerServiceProvider extends ServiceProvider {
 
     public function boot() {
-        $this->loadRoutes();
-
-        $this->publishes([
-            __DIR__.'/../configuration' => config_path('yaml/application'),
-        ]);
-
+        $this->loadRoutes()
+            ->registerMenu();
     }
 
     /**
@@ -22,8 +19,7 @@ class ImageManagerServiceProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
-        $this->registerDependencies()
-            ->loadConfiguration();
+        $this->registerDependencies();
     }
 
     /**
@@ -40,20 +36,13 @@ class ImageManagerServiceProvider extends ServiceProvider {
     }
 
     /**
-     * Load configuration .
+     * Register menu .
      *
-     * @return $this
      */
-    protected function loadConfiguration() {
-        Support\set_config_from_yaml(
-            __DIR__ . '/../configuration/general.yaml' , 'administrator'
-        );
+    protected function registerMenu() {
+        $menuManager = app('menu-manager');
 
-        Support\merge_yaml_config_from(
-            config_path('yaml/application/general.yaml') , 'administrator'
-        );
-
-        return $this;
+        $menuManager->addNamespace(realpath(__DIR__ . '/../'), true);
     }
 
     /**
@@ -62,7 +51,7 @@ class ImageManagerServiceProvider extends ServiceProvider {
      */
     protected function registerDependencies() {
         $dependencies = [
-
+            ImageAbleServiceProvider::class
         ];
 
         array_walk($dependencies, function($dependency) {
