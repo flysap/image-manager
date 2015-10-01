@@ -1,0 +1,13 @@
+{
+  "name" : "flysap/image-manager",
+  "description" : "Image manager",
+  "version" : "1.0",
+
+  "menu": [
+    {
+      "section": "Image Manager",
+      "label"  : "Images  (:total_images)",
+      "href"   : "/admin/images"
+    }
+  ]
+}
