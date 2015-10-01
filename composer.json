@@ -11,6 +11,15 @@
       "email": "radu.bordei89@gmail.com"
     }
   ],
+  "repositories": [
+    {
+      "type": "git",
+      "url": "git@github.com:parfumix/eloquent-imageable.git"
+    }
+  ],
+  "require": {
+    "parfumix/eloquent-imageable": "dev-master"
+  },
   "autoload": {
     "psr-4": {
       "Flysap\\ImageManager\\": "src/"
