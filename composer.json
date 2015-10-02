@@ -1,5 +1,5 @@
 {
-  "name": "flysap/image-manager",
+  "name": "flysap/media",
   "description": "SMG",
   "require": {
     "laravel/framework": "~5.1"
@@ -11,18 +11,10 @@
       "email": "radu.bordei89@gmail.com"
     }
   ],
-  "repositories": [
-    {
-      "type": "git",
-      "url": "git@github.com:parfumix/eloquent-imageable.git"
-    }
-  ],
-  "require": {
-    "parfumix/eloquent-imageable": "dev-master"
-  },
+  "require": {},
   "autoload": {
     "psr-4": {
-      "Flysap\\ImageManager\\": "src/"
+      "Flysap\\Media\\": "src/"
     }
   },
   "minimum-stability": "dev"

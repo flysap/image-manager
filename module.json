@@ -1,13 +1,13 @@
 {
-  "name" : "flysap/image-manager",
-  "description" : "Image manager",
+  "name" : "flysap/media-manager",
+  "description" : "Media manager",
   "version" : "1.0",
 
   "menu": [
     {
-      "section": "Images",
+      "section": "Media",
       "label"  : "Uploaded",
-      "href"   : "/admin/images"
+      "href"   : "/admin/media"
     }
   ]
 }

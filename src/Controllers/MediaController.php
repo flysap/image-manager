@@ -1,9 +1,8 @@
 <?php
 
-namespace Flysap\ImageManager\Controllers;
+namespace Flysap\Media\Controllers;
 
 use App\Http\Controllers\Controller;
-use Eloquent\ImageAble\Attachment;
 use Parfumix\TableManager;
 
 class ImageController extends Controller {
@@ -15,7 +14,7 @@ class ImageController extends Controller {
      */
     public function lists() {
 
-        $table = TableManager\table((new Attachment), 'eloquent', ['class' => 'table table-hover']);
+        $table = TableManager\table((new Media), 'eloquent', ['class' => 'table table-hover']);
 
         return view('themes::pages.table', [
             'title' => _('Images'),
