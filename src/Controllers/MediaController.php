@@ -22,4 +22,16 @@ class MediaController extends Controller {
             'table' => $table
         ]);
     }
+
+    public function update() {
+
+    }
+
+    public function remove() {
+
+    }
+
+    public function edit() {
+
+    }
 }
