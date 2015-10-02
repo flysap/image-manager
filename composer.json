@@ -11,7 +11,16 @@
       "email": "radu.bordei89@gmail.com"
     }
   ],
-  "require": {},
+  "repositories": [
+    {
+      "type": "git",
+      "url": "git@github.com:parfumix/laravel-image-uploader.git"
+    }
+  ],
+  "require": {
+    "cartalyst/tags": "2.0.*",
+    "parfumix/laravel-image-uploader": "dev-master"
+  },
   "autoload": {
     "psr-4": {
       "Flysap\\Media\\": "src/"
