@@ -10,7 +10,12 @@ class MediaServiceProvider extends ServiceProvider {
 
     public function boot() {
         $this->loadRoutes()
+            ->loadConfiguration()
             ->registerMenu();
+
+        $this->publishes([
+            __DIR__.'/../configuration' => config_path('yaml/media-manager'),
+        ]);
     }
 
     /**
@@ -31,6 +36,23 @@ class MediaServiceProvider extends ServiceProvider {
         /** Register routes . */
         if (! $this->app->routesAreCached())
             require __DIR__.'/../routes.php';
+
+        return $this;
+    }
+
+    /**
+     * Load configuration .
+     *
+     * @return $this
+     */
+    protected function loadConfiguration() {
+        Support\set_config_from_yaml(
+            __DIR__ . '/../configuration/general.yaml' , 'media-manager'
+        );
+
+        Support\merge_yaml_config_from(
+            config_path('yaml/media-manager/general.yaml') , 'media-manager'
+        );
 
         return $this;
     }

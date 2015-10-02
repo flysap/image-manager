@@ -3,9 +3,10 @@
 namespace Flysap\Media\Controllers;
 
 use App\Http\Controllers\Controller;
+use Flysap\Media\Media;
 use Parfumix\TableManager;
 
-class ImageController extends Controller {
+class MediaController extends Controller {
 
     /**
      * Lists all images .
