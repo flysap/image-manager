@@ -14,6 +14,8 @@ class Media extends Model implements TaggableInterface {
 
     public $timestamps = true;
 
+    public $fillable = ['id', 'title', 'description', 'path', 'full_path', 'active'];
+
     /**
      * Active scope .
      *

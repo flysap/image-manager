@@ -14,8 +14,20 @@ class MediaController extends Controller {
      * @return \Illuminate\View\View
      */
     public function lists() {
-
         $table = TableManager\table((new Media), 'eloquent', ['class' => 'table table-hover']);
+
+        $table->addColumn(['closure' => function($value, $attributes) {
+            $elements = $attributes['elements'];
+
+            $edit_route = route('media_edit', ['id' => $elements['id']]);
+            $delete_route = route('media_delete', ['id' => $elements['id']]);
+
+            return <<<DOC
+<a href="$edit_route">Edit</a><br />
+<a href="$delete_route">Delete</a><br />
+DOC;
+            ;
+        }], 'action');
 
         return view('themes::pages.table', [
             'title' => _('Images'),
@@ -23,15 +35,35 @@ class MediaController extends Controller {
         ]);
     }
 
-    public function update() {
+    /**
+     * Update by id .
+     *
+     * @param $id
+     */
+    public function update($id) {
 
     }
 
-    public function remove() {
+    /**
+     * Remove by id .
+     *
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete($id) {
+        if( $media = Media::where('id', $id) )
+            $media->delete();
 
+        return redirect()
+            ->back();
     }
 
-    public function edit() {
+    /**
+     * Edit by id .
+     *
+     * @param $id
+     */
+    public function edit($id) {
 
     }
 }
