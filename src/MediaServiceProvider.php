@@ -1,6 +1,6 @@
 <?php
 
-namespace Flysap\ImageManager;
+namespace Flysap\Media;
 
 use Eloquent\ImageAble\ImageAbleServiceProvider;
 use Illuminate\Support\ServiceProvider;
