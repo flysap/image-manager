@@ -2,6 +2,7 @@
 
 namespace Flysap\Media;
 
+use Cartalyst\Tags\TagsServiceProvider;
 use Eloquent\ImageAble\ImageAbleServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Flysap\Support;
@@ -15,6 +16,7 @@ class MediaServiceProvider extends ServiceProvider {
 
         $this->publishes([
             __DIR__.'/../configuration' => config_path('yaml/media-manager'),
+            __DIR__.'/../migrations/' => database_path('migrations'),
         ]);
     }
 
@@ -73,7 +75,8 @@ class MediaServiceProvider extends ServiceProvider {
      */
     protected function registerDependencies() {
         $dependencies = [
-            ImageAbleServiceProvider::class
+            ImageAbleServiceProvider::class,
+            TagsServiceProvider::class,
         ];
 
         array_walk($dependencies, function($dependency) {
