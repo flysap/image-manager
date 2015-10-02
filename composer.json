@@ -1,5 +1,5 @@
 {
-  "name": "flysap/media",
+  "name": "flysap/media-manager",
   "description": "SMG",
   "require": {
     "laravel/framework": "~5.1"
