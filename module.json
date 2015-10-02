@@ -5,8 +5,8 @@
 
   "menu": [
     {
-      "section": "Image Manager",
-      "label"  : "Images  (:total_images)",
+      "section": "Images",
+      "label"  : "Uploaded",
       "href"   : "/admin/images"
     }
   ]
