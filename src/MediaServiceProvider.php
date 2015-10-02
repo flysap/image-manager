@@ -6,7 +6,7 @@ use Eloquent\ImageAble\ImageAbleServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Flysap\Support;
 
-class ImageServiceProvider extends ServiceProvider {
+class MediaServiceProvider extends ServiceProvider {
 
     public function boot() {
         $this->loadRoutes()
