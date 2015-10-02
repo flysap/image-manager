@@ -4,7 +4,7 @@ namespace Flysap\ImageManager\Controllers;
 
 use App\Http\Controllers\Controller;
 use Eloquent\ImageAble\Attachment;
-use Flysap\TableManager;
+use Parfumix\TableManager;
 
 class ImageController extends Controller {
 
