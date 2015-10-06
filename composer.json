@@ -15,9 +15,14 @@
     {
       "type": "git",
       "url": "git@github.com:parfumix/laravel-image-uploader.git"
+    },
+    {
+      "type": "git",
+      "url" : "git@github.com:parfumix/form-builder.git"
     }
   ],
   "require": {
+    "parfumix/form-builder": "dev-master",
     "cartalyst/tags": "2.0.*",
     "parfumix/laravel-image-uploader": "dev-master"
   },
