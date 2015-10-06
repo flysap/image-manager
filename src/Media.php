@@ -28,6 +28,15 @@ class Media extends Model implements TaggableInterface, Translatable {
     public $fillable = ['id', 'path', 'full_path', 'active'];
 
     /**
+     * Get presenter .
+     *
+     * @return MediaPresenter
+     */
+    public function getPresenter() {
+        return new MediaPresenter($this);
+    }
+
+    /**
      * Active scope .
      *
      * @param $query

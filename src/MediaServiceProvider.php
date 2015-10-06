@@ -6,6 +6,7 @@ use Cartalyst\Tags\TagsServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Flysap\Support;
 use Parfumix\Imageonfly\ImageOnFlyServiceProvider;
+use Robbo\Presenter\PresenterServiceProvider;
 
 class MediaServiceProvider extends ServiceProvider {
 
@@ -77,6 +78,7 @@ class MediaServiceProvider extends ServiceProvider {
         $dependencies = [
             ImageOnFlyServiceProvider::class,
             TagsServiceProvider::class,
+            PresenterServiceProvider::class
         ];
 
         array_walk($dependencies, function($dependency) {
