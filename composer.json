@@ -22,6 +22,7 @@
     }
   ],
   "require": {
+    "robclancy/presenter": "1.3.*",
     "parfumix/form-builder": "dev-master",
     "cartalyst/tags": "2.0.*",
     "parfumix/laravel-image-uploader": "dev-master"
