@@ -3,9 +3,9 @@
 namespace Flysap\Media;
 
 use Cartalyst\Tags\TagsServiceProvider;
-use Eloquent\ImageAble\ImageAbleServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use Flysap\Support;
+use Parfumix\Imageonfly\ImageOnFlyServiceProvider;
 
 class MediaServiceProvider extends ServiceProvider {
 
@@ -75,7 +75,7 @@ class MediaServiceProvider extends ServiceProvider {
      */
     protected function registerDependencies() {
         $dependencies = [
-            ImageAbleServiceProvider::class,
+            ImageOnFlyServiceProvider::class,
             TagsServiceProvider::class,
         ];
 

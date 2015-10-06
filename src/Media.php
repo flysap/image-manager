@@ -4,17 +4,28 @@ namespace Flysap\Media;
 
 use Cartalyst\Tags\TaggableInterface;
 use Cartalyst\Tags\TaggableTrait;
+use Eloquent\Translatable\Translatable;
+use Eloquent\Translatable\TranslatableTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class Media extends Model implements TaggableInterface {
+class Media extends Model implements TaggableInterface, Translatable {
 
     use TaggableTrait;
 
+    use TranslatableTrait;
+
     public $table = 'media';
+
+    protected $translationClass = MediaTranslation::class;
+
+    public $translatedAttributes = [
+        'title' => 'text',
+        'description' => 'wysiwyg',
+    ];
 
     public $timestamps = true;
 
-    public $fillable = ['id', 'title', 'description', 'path', 'full_path', 'active'];
+    public $fillable = ['id', 'path', 'full_path', 'active'];
 
     /**
      * Active scope .
