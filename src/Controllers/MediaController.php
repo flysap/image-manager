@@ -10,6 +10,7 @@ use Parfumix\TableManager;
 use Parfumix\FormBuilder;
 use Localization as Locale;
 use Illuminate\Http\Request;
+use FLysap\Support;
 
 class MediaController extends Controller {
 
@@ -131,8 +132,12 @@ DOC;
      * @return \Illuminate\Http\RedirectResponse
      */
     public function delete($id) {
-        if( $media = $this->repository->where('id', $id) )
+        if( $media = $this->repository->where('id', $id)->first() ) {
+            if( Support\is_path_exists( $media->getPresenter()->fullPath() ) )
+                Support\remove_paths( $media->getPresenter()->fullPath() );
+
             $media->delete();
+        }
 
         return redirect()
             ->back();
@@ -141,10 +146,12 @@ DOC;
     /**
      * Edit by id .
      *
+     * @param Request $request
      * @param $id
      * @return \Illuminate\View\View
+     * @throws FormBuilder\ElementException
      */
-    public function edit($id) {
+    public function edit(Request $request, $id) {
         $mediaRow = $this->repository
             ->find($id);
 
@@ -216,6 +223,23 @@ DOC;
         $mediaRow
             ->fill($_POST)
             ->save();
+
+        if( $request->hasFile('file') ) {
+            if( Support\is_path_exists( $mediaRow->getPresenter()->fullPath() ) )
+                Support\remove_paths( $mediaRow->getPresenter()->fullPath() );
+
+            $images = $this->upload(
+                $request->file('file')
+            );
+
+            array_walk($images, function($image) use($mediaRow) {
+                $mediaRow
+                    ->fill([
+                        'path' => '/'. config('media-manager.path', '') . DIRECTORY_SEPARATOR . $image->basename,
+                        'full_path' => public_path(config('media-manager.path', '') . DIRECTORY_SEPARATOR . $image->basename),
+                    ])->save();
+            });
+        }
 
         if( $mediaRow instanceof TaggableInterface )
             if( isset($_POST['tags']) )

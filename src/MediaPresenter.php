@@ -14,4 +14,13 @@ class MediaPresenter extends Presenter {
     public function url() {
         return $this->path;
     }
+
+    /**
+     * Get full path .
+     *
+     * @return mixed
+     */
+    public function fullPath() {
+        return $this->full_path;
+    }
 }
