@@ -28,6 +28,17 @@ class Media extends Model implements TaggableInterface, Translatable {
     public $fillable = ['id', 'path', 'full_path', 'active'];
 
     /**
+     * Manage show fields .
+     *
+     * @return array
+     */
+    public function skyShow() {
+        return ['id', 'path' => ['closure' => function($path) {
+            return '<img src="'.$path.'" width="200px">';
+        }]];
+    }
+
+    /**
      * Get presenter .
      *
      * @return MediaPresenter

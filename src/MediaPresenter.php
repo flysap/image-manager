@@ -7,6 +7,15 @@ use Robbo\Presenter\Presenter;
 class MediaPresenter extends Presenter {
 
     /**
+     * Render image .
+     *
+     * @return string
+     */
+    public function image() {
+        return '<img src="'.$this->path.'">';
+    }
+
+    /**
      * Get path .
      *
      * @return mixed
