@@ -109,8 +109,8 @@ DOC;
         array_walk($images, function($image) use($mediaRow) {
             $mediaRow
                 ->fill([
-                    'path' => $image->relative_path,
-                    'full_path' => $image->dirname . DIRECTORY_SEPARATOR . $image->basename,
+                    'path' => '/'. config('media-manager.path', '') . DIRECTORY_SEPARATOR . $image->basename,
+                    'full_path' => public_path(config('media-manager.path', '') . DIRECTORY_SEPARATOR . $image->basename),
                 ])->save();
         });
 
@@ -153,6 +153,12 @@ DOC;
                 'action' => route('media_edit', ['id' => $id]),
                 'enctype' => FormBuilder\Form::ENCTYPE_MULTIPART,
                 'method' => FormBuilder\Form::METHOD_POST
+            ]);
+
+            $elements[] = FormBuilder\element_image('file', [
+                'name'  => 'file',
+                'group' => 'default',
+                'src' => $mediaRow->getPresenter()->url()
             ]);
 
             $elements[] = FormBuilder\element_file('file', [
@@ -233,9 +239,9 @@ DOC;
         $processor = $this->getProcessor();
 
         if( is_null($path) )
-            $path = config('media-manager.store_path', '');
+            $path = config('media-manager.path', '');
 
-        $path = storage_path($path);
+        $path = public_path($path);
 
         $filters = array_merge($filters, config('media-manager.filters'));
 
