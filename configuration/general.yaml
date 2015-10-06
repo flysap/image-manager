@@ -1,4 +1,6 @@
+# there will be store path relative from public path .
 path: media
 
+# default filters will be walking through uploaded images .
 filters:
    - fit_100
