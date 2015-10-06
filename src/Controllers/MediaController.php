@@ -37,7 +37,6 @@ class MediaController extends Controller {
 <a href="$edit_route">Edit</a><br />
 <a href="$delete_route">Delete</a><br />
 DOC;
-            ;
         }], 'action');
 
         return view('themes::pages.table', [
