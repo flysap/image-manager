@@ -1,4 +1,4 @@
-store_path: media
+path: media
 
 filters:
    - fit_100
