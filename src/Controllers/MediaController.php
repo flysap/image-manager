@@ -62,7 +62,10 @@ DOC;
                 'method' => FormBuilder\Form::METHOD_POST
             ]);
 
-            $elements[] = FormBuilder\element_file('file', [
+
+            $elements[] = FormBuilder\element_file('', [
+                'before' => '<div class="btn btn-default btn-file"><i class="fa fa-paperclip"></i> Attachment',
+                'after'  => '</div>',
                 'name'  => 'file',
                 'group' => 'default'
             ]);
@@ -169,7 +172,9 @@ DOC;
                 'width' => '500px'
             ]);
 
-            $elements[] = FormBuilder\element_file('file', [
+            $elements[] = FormBuilder\element_file('', [
+                'before' => '<div class="btn btn-default btn-file"><i class="fa fa-paperclip"></i> Attachment',
+                'after'  => '</div>',
                 'name'  => 'file',
                 'group' => 'default'
             ]);
