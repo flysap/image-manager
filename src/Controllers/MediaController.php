@@ -162,10 +162,11 @@ DOC;
                 'method' => FormBuilder\Form::METHOD_POST
             ]);
 
-            $elements[] = FormBuilder\element_image('file', [
-                'name'  => 'file',
+            $elements[] = FormBuilder\element_image('image', [
+                'name'  => 'image',
                 'group' => 'default',
-                'src' => $mediaRow->getPresenter()->url()
+                'src' => $mediaRow->getPresenter()->url(),
+                'width' => '500px'
             ]);
 
             $elements[] = FormBuilder\element_file('file', [
