@@ -5,8 +5,15 @@ namespace Flysap\Media\Controllers;
 use App\Http\Controllers\Controller;
 use Flysap\Media\Media;
 use Parfumix\TableManager;
+use Parfumix\FormBuilder;
 
 class MediaController extends Controller {
+
+    protected $repository;
+
+    public function __construct() {
+        $this->repository = (new Media);
+    }
 
     /**
      * Lists all images .
@@ -14,7 +21,7 @@ class MediaController extends Controller {
      * @return \Illuminate\View\View
      */
     public function lists() {
-        $table = TableManager\table((new Media), 'eloquent', ['class' => 'table table-hover']);
+        $table = TableManager\table($this->repository, 'eloquent', ['class' => 'table table-hover']);
 
         $table->addColumn(['closure' => function($value, $attributes) {
             $elements = $attributes['elements'];
@@ -31,16 +38,39 @@ DOC;
 
         return view('themes::pages.table', [
             'title' => _('Images'),
+            'addRoute' => route('media_create'),
             'table' => $table
         ]);
     }
 
     /**
-     * Update by id .
+     * Adding create logic business .
      *
-     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
      */
-    public function update($id) {
+    public function create() {
+        if(! $_POST) {
+            $form = FormBuilder\create_form([
+                'action' => route('media_create'),
+                'method' => FormBuilder\Form::METHOD_POST
+            ]);
+
+            $elements[] = FormBuilder\element_text('slug', [
+                'name'  => 'slug',
+                'group' => 'default'
+            ]);
+
+            $form->addElements($elements);
+
+            return view('scaffold::scaffold.edit', compact('form'));
+        }
+
+        $mediaRow = $this->repository
+            ->create($_POST);
+
+        return redirect(
+            route('media_edit', ['id' => $mediaRow->id])
+        );
 
     }
 
@@ -51,7 +81,7 @@ DOC;
      * @return \Illuminate\Http\RedirectResponse
      */
     public function delete($id) {
-        if( $media = Media::where('id', $id) )
+        if( $media = $this->repository->where('id', $id) )
             $media->delete();
 
         return redirect()
