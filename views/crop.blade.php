@@ -48,7 +48,7 @@
 
                         $("#save").click(function() {
                             $.post('', $image.cropper('getData'), function() {
-                                console.log(1)
+                                window.location.reload()
                             })
                         });
                     })
