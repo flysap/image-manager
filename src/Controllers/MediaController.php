@@ -179,10 +179,22 @@ DOC;
                 'group' => 'default'
             ]);
 
+            $elements[] = FormBuilder\element_hidden('', [
+                'value' => 0,
+                'name'  => 'active',
+                'group' => 'default'
+            ]);
+
             $elements[] = FormBuilder\element_checkbox('active', [
                 'name'  => 'active',
                 'group' => 'default',
                 'value' => $mediaRow->active
+            ]);
+
+            $elements[] = FormBuilder\element_link('Crop', [
+                'group' => 'default',
+                'href' => route('media_crop', ['id' => $id]),
+                'title' => 'Crop image',
             ]);
 
             if( $mediaRow instanceof Translatable ) {
@@ -250,6 +262,40 @@ DOC;
         if( $mediaRow instanceof TaggableInterface )
             if( isset($_POST['tags']) )
                 $mediaRow->setTags($_POST['tags']);
+
+        return back();
+    }
+
+    /**
+     * Crop image
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\View\View
+     */
+    public function crop(Request $request, $id) {
+        $mediaRow = $this->repository
+            ->find($id);
+
+        if(! $request->isMethod('POST')) {
+            $image = FormBuilder\element_image('image', [
+                'group' => 'default',
+                'src' => $mediaRow->getPresenter()->url(),
+                'width' => '700px'
+            ]);
+
+            return view('scaffold::crop', compact('image'));
+        }
+
+        $processor = $this->getProcessor();
+
+        $processor->filter(
+            $mediaRow->getPresenter()->fullPath(),
+            [
+                'crop' => $request->all(),
+                'rotate' => $request->all()
+            ]
+        );
 
         return back();
     }
