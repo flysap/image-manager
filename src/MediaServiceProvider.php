@@ -12,6 +12,7 @@ class MediaServiceProvider extends ServiceProvider {
 
     public function boot() {
         $this->loadRoutes()
+            ->loadViews()
             ->loadConfiguration()
             ->registerMenu();
 
@@ -28,6 +29,21 @@ class MediaServiceProvider extends ServiceProvider {
      */
     public function register() {
         $this->registerDependencies();
+    }
+
+    /**
+     * Load views.
+     *
+     * @return $this
+     */
+    protected function loadViews() {
+        $this->loadViewsFrom(__DIR__ . '/../views', 'scaffold');
+
+        $this->publishes([
+            __DIR__ . '/../views' => base_path('resources/views/vendor/scaffold'),
+        ]);
+
+        return $this;
     }
 
     /**
