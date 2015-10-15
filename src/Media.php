@@ -16,6 +16,8 @@ class Media extends Model implements TaggableInterface, Translatable {
 
     public $table = 'media';
 
+    protected $translation_id = 'media_id';
+
     protected $translationClass = MediaTranslation::class;
 
     public $translatedAttributes = [
